@@ -1,11 +1,18 @@
 RewriteEngine On
 
-# If file exists as-is, use it
+# 1. FORCE CORRECT HEADERS (The "No Code" Fix)
+# This tells the app that PlaceLauncher is a COMMAND, not a TEXT file
+<Files "PlaceLauncher.ashx">
+    Header set Content-Type "application/json"
+</Files>
+
+# This tells the app that visit.ashx is a SCRIPT
+<Files "visit.ashx">
+    Header set Content-Type "text/plain"
+</Files>
+
+# 2. YOUR PHP MAPPING LOGIC
 RewriteCond %{REQUEST_FILENAME} !-f
-
-# If folder doesn't exist
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Try adding .php
 RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+)$ $1.php [L]
+RewriteRule ^(.+)$ $1.php [L,QSA]
