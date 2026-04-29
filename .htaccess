@@ -1,16 +1,17 @@
-# 1. FIX THE "SHOWING CODE" ISSUE
-# Instead of 'Header set', we map the extension to the correct type
-AddType application/json .ashx
-AddType text/plain .ashz
-
-# 2. THE PHP REDIRECT LOGIC
 RewriteEngine On
 RewriteBase /
 
-# If the file exists, just serve it
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ - [L]
+# 1. Map .ashx requests to .php files silently
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.ashx$ $1.php [L,QSA]
 
-# If adding .php makes it a real file, use that
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+)$ $1.php [L,QSA]
+# 2. Map .ashz requests to .php files (for your join script)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)\.ashz$ $1.php [L,QSA]
+
+# 3. Ensure the server tells the app it's JSON
+<FilesMatch "\.php$">
+    # Only force JSON for the PlaceLauncher
+    RewriteCond %{REQUEST_URI} PlaceLauncher
+    RewriteRule ^ - [E=CONTENT_TYPE:application/json]
+</FilesMatch>
