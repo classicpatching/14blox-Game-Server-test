@@ -1,21 +1,22 @@
 RewriteEngine On
 RewriteBase /
 
-# 1. REMOVE .PHP FROM URLS
-# If the user asks for /games/list, the server looks for /games/list.php
+# 1. THE URL CLEANER
+# This makes /games/list work without needing .php in the URL
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*?)/?$ $1.php [L]
 
-# 2. FORCE JSON FOR THE GAMES LIST
-# This prevents the app from showing raw code on the screen
+# 2. THE HEADER FIX (Without crashing the server)
+# Instead of 'Header set', we use 'ForceType' inside location blocks
 <Files "list.php">
-    AddType application/json .php
-    Header set Content-Type "application/json"
+    ForceType application/json
 </Files>
 
-# 3. FORCE JSON FOR PLACELAUNCHER
 <Files "PlaceLauncher.php">
-    AddType application/json .php
-    Header set Content-Type "application/json"
+    ForceType application/json
+</Files>
+
+<Files "visit.php">
+    ForceType text/plain
 </Files>
