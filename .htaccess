@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# If file exists as-is, use it
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# If folder doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Try adding .php
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
