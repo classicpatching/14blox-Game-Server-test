@@ -14,7 +14,7 @@
     <h1>Test stuff</h1>
     <div style="border: 1px solid #333; padding: 20px; display: inline-block; border-radius: 15px;">
         <h3>Game</h3>
-        <a href="roblox-mobile://test14.com/game/PlaceLauncher.ashx" class="btn">PLAY NOW</a>
+        <a href="http://rbx.pii.at/game/PlaceLauncher.ashx" class="btn">PLAY NOW</a>
     </div>
 </body>
 </html>
