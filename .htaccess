@@ -1,17 +1,21 @@
 RewriteEngine On
 RewriteBase /
 
-# 1. Map .ashx requests to .php files silently
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)\.ashx$ $1.php [L,QSA]
+# 1. REMOVE .PHP FROM URLS
+# If the user asks for /games/list, the server looks for /games/list.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*?)/?$ $1.php [L]
 
-# 2. Map .ashz requests to .php files (for your join script)
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)\.ashz$ $1.php [L,QSA]
+# 2. FORCE JSON FOR THE GAMES LIST
+# This prevents the app from showing raw code on the screen
+<Files "list.php">
+    AddType application/json .php
+    Header set Content-Type "application/json"
+</Files>
 
-# 3. Ensure the server tells the app it's JSON
-<FilesMatch "\.php$">
-    # Only force JSON for the PlaceLauncher
-    RewriteCond %{REQUEST_URI} PlaceLauncher
-    RewriteRule ^ - [E=CONTENT_TYPE:application/json]
-</FilesMatch>
+# 3. FORCE JSON FOR PLACELAUNCHER
+<Files "PlaceLauncher.php">
+    AddType application/json .php
+    Header set Content-Type "application/json"
+</Files>
