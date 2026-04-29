@@ -1,13 +1,12 @@
 FROM php:8.2-apache
 
-# Enable useful modules
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Enable Apache rewrite (useful for APIs)
+RUN a2enmod rewrite
 
-# Copy your site files
+# Copy your files
 COPY . /var/www/html/
 
-# Fix permissions (optional)
+# Permissions
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose port (Render uses 10000 internally)
 EXPOSE 80
