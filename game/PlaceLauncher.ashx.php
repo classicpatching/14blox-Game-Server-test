@@ -5,6 +5,6 @@ header("Content-Type: application/json");
 echo json_encode([
     "jobId" => "testsessiin",
     "status" => 2,
-    "joinScriptUrl" => "http://test14.com/game/visit.ashx"
+    "joinScriptUrl" => "http://rbx.pii.at/game/visit.ashx"
 ]);
 ?>
