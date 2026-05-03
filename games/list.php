@@ -15,7 +15,7 @@
     <h1>Goated Revival</h1>
     <div style="border: 1px solid #333; padding: 20px; display: inline-block; border-radius: 15px;">
         <h3>Main Game</h3>
-<a href="intent://rbx.pii.at/game/PlaceLauncher.ashx#Intent;scheme=roblox-mobile;package=com.ftblox.client;end" class="btn">PLAY NOW</a>
+<a href="intent://rbx.pii.at/game/PlaceLauncher.ashx" class="btn">PLAY NOW</a>
     </div>
 </body>
 </html>
