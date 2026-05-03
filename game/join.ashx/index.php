@@ -1,27 +1,52 @@
 <?php
-header('Content-Type: text/xml');
+// ОБЯЗАТЕЛЬНО: ставим заголовок простого текста, чтобы браузер не пытался это парсить как XML
+header('Content-Type: text/plain; charset=utf-8');
 
-// 1. Настройки подключения
-$localIp = "185.27.71.228"; // ВПИШИ СЮДА СВОЙ IPv4 (из ipconfig)
+$localIp = "185.27.71.228"; // Твой IP
 $port = 53640;
-
-// 2. Генерируем Гостя (Guest) как в старые добрые
 $guestId = rand(1000, 9999);
-$userName = "Guest " . $guestId;
-$userId = -$guestId; // У гостей всегда отрицательный ID
 
-// 3. Формируем XML ответ
-echo '<?xml version="1.0" encoding="UTF-8"?>';
-?>
-<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <v>1</v>
-  <p>
-    <string name="MachineAddress"><?php echo $localIp; ?></string>
-    <int name="ServerPort"><?php echo $port; ?></int>
-    <string name="Ticket">1</string>
-    <string name="UserName"><?php echo $userName; ?></string>
-    <int name="UserId"><?php echo $userId; ?></int>
-    <string name="MembershipType">None</string>
-    <string name="CharacterAppearance">http://<?php echo $_SERVER['HTTP_HOST']; ?>/asset/?id=1</string>
-  </p>
-</roblox>
+// Тот самый блок, который ты скинул. 
+// ВАЖНО: Подпись (rbxsig) привязана к содержимому. 
+// Если ты меняешь IP внутри, оригинальная подпись станет невалидной. 
+// Но некоторые патченные APK не проверяют подпись.
+
+$data = [
+    "ClientPort" => 0,
+    "MachineAddress" => $localIp,
+    "ServerPort" => $port,
+    "PingUrl" => "",
+    "PingInterval" => 120,
+    "UserName" => "Guest " . $guestId,
+    "SeleniumTestMode" => false,
+    "UserId" => $guestId,
+    "SuperSafeChat" => true,
+    "PlaceId" => 1,
+    "MeasurementUrl" => "",
+    "WaitingForCharacterGuid" => "e01c22e4-a428-45f8-ae40-5058b4a1dafc",
+    "BaseUrl" => "http://rbx.pii.at/",
+    "ChatStyle" => "Classic",
+    "VendorId" => 0,
+    "ScreenShotInfo" => "",
+    "VideoInfo" => "<?xml version=\"1.0\"?><entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:media=\"http://search.yahoo.com/mrss/\" xmlns:yt=\"http://gdata.youtube.com/schemas/2007\"><media:group><media:title type=\"plain\"><![CDATA[ROBLOX Place]]></media:title><media:description type=\"plain\"><![CDATA[ For more games visit http://www.roblox.com]]></media:description><media:category scheme=\"http://gdata.youtube.com/schemas/2007/categories.cat\">Games</media:category><media:keywords>ROBLOX, video, free game, online virtual world</media:keywords></media:group></entry>",
+    "CreatorId" => 0,
+    "CreatorTypeEnum" => "User",
+    "MembershipType" => "None",
+    "AccountAge" => 0,
+    "CookieStoreFirstTimePlayKey" => "rbx_evt_ftp",
+    "CookieStoreFiveMinutePlayKey" => "rbx_evt_fmp",
+    "CookieStoreEnabled" => true,
+    "IsRobloxPlace" => false,
+    "GenerateTeleportJoin" => false,
+    "IsUnknownOrUnder13" => true,
+    "SessionId" => "",
+    "DataCenterId" => 0,
+    "FollowUserId" => 0,
+    "UniverseId" => 0
+];
+
+$json = json_encode($data);
+
+// Выводим в формате: СИГНАТУРА + ПЕРЕНОС СТРОКИ + JSON
+echo "--rbxsig%Bmtk0ZBtDZIR/kucTSJIKodsN8T59t6sIwUfK2TVImeNNX5nPE16O4oGmFVJOv40dUfAsd6GQdW4QUW9VCKHupwcXJRnzg8s+jUCdRhozOjTqriEp3lluZqX60YNLMdxKKgZeAYcd7qiFxSVPnhS/Htx3T9fy9B3Hg5FvFGluCc=%\r\n";
+echo $json;
