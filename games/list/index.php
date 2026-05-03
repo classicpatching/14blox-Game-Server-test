@@ -1,39 +1,47 @@
 <?php
-// Если запрос идет от обычного браузера или WebView клиента
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background: #333; color: white; font-family: sans-serif; text-align: center; }
-        .game-card { border: 1px solid #555; padding: 20px; margin: 20px; border-radius: 10px; background: #444; }
-        .play-button { 
-            display: inline-block; padding: 15px 30px; 
-            background: #0084ff; color: white; text-decoration: none; 
-            font-weight: bold; border-radius: 5px; font-size: 20px;
+        body { background: #222; color: #fff; font-family: Arial; text-align: center; margin: 0; padding: 20px; }
+        .card { background: #333; border-radius: 10px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        h1 { font-size: 24px; }
+        p { color: #ccc; }
+        .btn { 
+            display: block; width: 100%; background: #007bff; color: white; 
+            padding: 15px 0; text-decoration: none; border-radius: 5px; 
+            font-weight: bold; font-size: 20px; margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Roblox</h1>
-    <div class="game-card">
-        <h2>Игра просто</h2>
-        <p>Описание: Игра просто.</p>
-        <!-- КНОПКА МАГИИ -->
-        <a href="#" onclick="window.external.StartGame('1', 'http://rbx.pii.at/game/join.ashx')" class="play-button">ИГРАТЬ</a>
-    </div>
 
-    <script>
-        // Старый метод для вызова игрового ядра из WebView
-        function startGame(placeId, joinUrl) {
-            if (window.external && window.external.StartGame) {
-                window.external.StartGame(placeId, joinUrl);
-            } else {
-                // Если мы в обычном браузере, просто покажем инфо
-                alert("Это должно быть открыто в APK!");
-            }
-        }
-    </script>
+<div class="card">
+    <h1>Игра</h1>
+    <p>Описание: игра просто.</p>
+    
+    <!-- Кнопка вызова движка через window.external -->
+    <a href="javascript:void(0)" onclick="play()" class="btn">ИГРАТЬ</a>
+</div>
+
+<script>
+function play() {
+    var placeId = 1;
+    var joinUrl = "http://rbx.pii.at/game/join.ashx";
+    
+    // Стандартный метод для старых APK, чтобы закрыть WebView и начать игру
+    if (window.external && typeof window.external.StartGame !== "undefined") {
+        window.external.StartGame(placeId, joinUrl);
+    } else {
+        // Запасной вариант через протокол, если window.external заблокирован
+        window.location.href = "robloxmobile://placeID=" + placeId + "&joinlocation=" + encodeURIComponent(joinUrl);
+    }
+}
+</script>
+
 </body>
 </html>
