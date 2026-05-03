@@ -21,7 +21,7 @@
         <h2>Игра просто</h2>
         <p>Описание: Игра просто.</p>
         <!-- КНОПКА МАГИИ -->
-        <a href="#" onclick="window.external.StartGame('1', 'http://rbx.pii.at/join.ashx')" class="play-button">ИГРАТЬ</a>
+        <a href="#" onclick="window.external.StartGame('1', 'http://rbx.pii.at/game/join.ashx')" class="play-button">ИГРАТЬ</a>
     </div>
 
     <script>
