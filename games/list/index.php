@@ -8,7 +8,7 @@ $games = [
         "Name" => "игра",
         "Description" => "игра просто.",
         "Creator" => "N.User-1",
-        "PlayerCount" => rand(50, 150), // Накручиваем онлайн для вида
+        "PlayerCount" => 0,
         "Thumbnail" => "http://" . $_SERVER['HTTP_HOST'] . "/assets/thumb1.png"
     ]
 ];
