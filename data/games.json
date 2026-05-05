@@ -3,10 +3,5 @@
   { "id": 2, "name": "Baseplate Obby" },
   { "id": 3, "name": "Baseplate Tycoon" },
   { "id": 4, "name": "Baseplate Survival" },
-  { "id": 5, "name": "Baseplate Racing" },
-  { "id": 6, "name": "Baseplate City Roleplay" },
-  { "id": 7, "name": "Baseplate Parkour" },
-  { "id": 8, "name": "Baseplate Sandbox" },
-  { "id": 9, "name": "Baseplate Combat Arena" },
-  { "id": 10, "name": "Baseplate Adventure World" }
+  { "id": 5, "name": "Baseplate Racing" }
 ]
