@@ -1,6 +1,6 @@
 <?php
 // Base URL for assets
-$baseUrl = "http://mart.rf.gd";
+$baseUrl = "http://rbx.pii.at";
 
 // Load games from local JSON file
 // Example file: data/games.json
