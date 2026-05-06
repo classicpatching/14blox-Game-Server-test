@@ -1,1 +1,18 @@
+# Enable rewrite
+RewriteEngine On
+
+# 🔧 Treat .ashx files as PHP
 AddType application/x-httpd-php .ashx
+
+# 1. Remove .html from URL (redirect)
+RewriteCond %{THE_REQUEST} \s(.+?)\.html[\s?] [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# 2. Remove trailing slash (except real folders)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# 3. Internally serve .html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
