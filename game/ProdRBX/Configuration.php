@@ -1,6 +1,6 @@
 <?php
-$baseUrl = "http://localhost:53640";
-$domainUrl ="localhost:53640";
+$baseUrl = "http://www.rbx.pii.at";
+$domainUrl = "www.rbx.pii.at";
 
 //for ios/android, it allows you to disable that annoying "Upgrade Me" popup
 $allowedVersions = array('AppAndroidV2.235.71216.1','AppiOSV2.126.39527','AppiOSV2.1','AppAndroidV1.0','AppiOSV2.138.43584','AppiOSV2.165.50938','AppiOSV2.234.70730','AppiOSV2.197.60133','AppiOSV2.172.52864','AppiOSV2.2.2','AppiOSV2.3.1','AppiOSV2.4.1','AppiOSV2.8.6','AppiOSV2.10.1','AppiOSV2.5.1','AppiOSV2.127.39818');
