@@ -32,5 +32,4 @@ switch($Offline){
 		break;
 }
 
-$MainDB = new PDO("mysql:host=$hostdb;dbname=$namedb", $accdb, $passdb);
 ?>
