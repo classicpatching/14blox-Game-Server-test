@@ -12,8 +12,8 @@ $UserId = rand(1, 5000);
 $data = [
     "jobId" => "TestJob" . rand(1, 999),
     "status" => 2, // Статус 2 — это "Joining", самый важный для старта
-    "joinScriptUrl" => $baseUrl . "/Game/join.ashx?placeId=" . $placeId . "&user=" . $UserId,
-    "authenticationUrl" => $baseUrl . "/Login/Negotiate.ashx",
+    "joinScriptUrl" => $baseUrl . "/game/join.ashx?placeId=" . $placeId . "&user=" . $UserId,
+    "authenticationUrl" => $baseUrl . "/login/Negotiate.ashx",
     "authenticationTicket" => "Guest:" . $UserId,
     "message" => null
 ];
